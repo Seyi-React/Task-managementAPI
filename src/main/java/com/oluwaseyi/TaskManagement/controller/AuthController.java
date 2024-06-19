@@ -1,7 +1,11 @@
 package com.oluwaseyi.TaskManagement.controller;
 
 
-import com.oluwaseyi.TaskManagement.security.JwtProvider;
+import com.oluwaseyi.TaskManagement.model.User;
+import com.oluwaseyi.TaskManagement.repository.UserRepository;
+import com.oluwaseyi.TaskManagement.security.JwtTokenProvider;
+
+// import com.oluwaseyi.TaskManagement.security.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
