@@ -7,5 +7,8 @@ import com.oluwaseyi.TaskManagement.model.User;
 
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username);
+    static User findByUsername(String username) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findByUsername'");
+    }
 }

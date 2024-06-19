@@ -2,11 +2,16 @@ package com.oluwaseyi.TaskManagement.model.Task;
 
 
 
-import javax.persistence.*;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.oluwaseyi.TaskManagement.model.User;
-
-import java.util.Date;
 
 @Entity
 public class Task {
@@ -49,6 +54,31 @@ public class Task {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public User getUser() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUser'");
+    }
+
+    public String getTitle() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTitle'");
+    }
+
+    public Date getDueDate() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getDueDate'");
+    }
+
+    public String getDescription() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getDescription'");
+    }
+
+    public boolean isCompleted() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isCompleted'");
     }
 
     

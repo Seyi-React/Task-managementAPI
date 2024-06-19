@@ -32,7 +32,7 @@ public class AuthController {
         String username = request.get("username");
         String password = request.get("password");
 
-        if (userRepository.findByUsername(username) != null) {
+        if (UserRepository.findByUsername(username) != null) {
             return ResponseEntity.badRequest().body("Username is already taken");
         }
 
@@ -49,7 +49,7 @@ public class AuthController {
         String username = request.get("username");
         String password = request.get("password");
 
-        User user = userRepository.findByUsername(username);
+        User user = UserRepository.findByUsername(username);
         if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
             return ResponseEntity.badRequest().body("Invalid username or password");
         }

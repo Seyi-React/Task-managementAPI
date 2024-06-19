@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import com.oluwaseyi.TaskManagement.model.Task.Task;
+import com.oluwaseyi.TaskManagement.model.User;
+import com.oluwaseyi.TaskManagement.repository.TaskRepository.TaskRepository;
+import com.oluwaseyi.TaskManagement.repository.UserRepository;
+import com.oluwaseyi.TaskManagement.security.JwtTokenProvider;
+
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
@@ -25,13 +31,13 @@ public class TaskController {
 
     @GetMapping
     public List<Task> getAllTasks(@AuthenticationPrincipal UserDetails currentUser) {
-        User user = userRepository.findByUsername(currentUser.getUsername());
+        User user = UserRepository.findByUsername(currentUser.getUsername());
         return taskRepository.findByUserId(user.getId());
     }
 
     @GetMapping("/{taskId}")
     public ResponseEntity<?> getTaskById(@AuthenticationPrincipal UserDetails currentUser, @PathVariable Long taskId) {
-        User user = userRepository.findByUsername(currentUser.getUsername());
+        User user = UserRepository.findByUsername(currentUser.getUsername());
         Optional<Task> task = taskRepository.findById(taskId);
         if (task.isPresent() && task.get().getUser().getId().equals(user.getId())) {
             return ResponseEntity.ok(task.get());
@@ -41,14 +47,14 @@ public class TaskController {
 
     @PostMapping
     public Task createTask(@AuthenticationPrincipal UserDetails currentUser, @RequestBody Task task) {
-        User user = userRepository.findByUsername(currentUser.getUsername());
+        User user = UserRepository.findByUsername(currentUser.getUsername());
         task.setUser(user);
         return taskRepository.save(task);
     }
 
     @PutMapping("/{taskId}")
     public ResponseEntity<?> updateTask(@AuthenticationPrincipal UserDetails currentUser, @PathVariable Long taskId, @RequestBody Task updatedTask) {
-        User user = userRepository.findByUsername(currentUser.getUsername());
+        User user = UserRepository.findByUsername(currentUser.getUsername());
         Optional<Task> task = taskRepository.findById(taskId);
         if (task.isPresent() && task.get().getUser().getId().equals(user.getId())) {
             task.get().setTitle(updatedTask.getTitle());
@@ -62,7 +68,7 @@ public class TaskController {
 
     @DeleteMapping("/{taskId}")
     public ResponseEntity<?> deleteTask(@AuthenticationPrincipal UserDetails currentUser, @PathVariable Long taskId) {
-        User user = userRepository.findByUsername(currentUser.getUsername());
+        User user = UserRepository.findByUsername(currentUser.getUsername());
         Optional<Task> task = taskRepository.findById(taskId);
         if (task.isPresent() && task.get().getUser().getId().equals(user.getId())) {
             taskRepository.delete(task.get());
